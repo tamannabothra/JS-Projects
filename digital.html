@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh; /* Ensure full viewport height */
+            margin: 0;
+        }
+
+        .clock {
+            color: #17D4FE;
+            font-size: 54px; /* Reduced font size for date */
+            letter-spacing: 2px; /* Reduced letter spacing for date */
+        }
+        footer {
+            text-align: center;
+            background-color: #424446;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        
+        }
+    </style>
+</head>
+<body>
+    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+    <script>
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+            
+            if (h == 0) {
+                h = 12;
+            }
+            
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+            
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            
+            var time = h + ":" + m + ":" + s + " " + session;
+
+            var day = date.getDate(); // 1 - 31
+            var month = date.getMonth() + 1; // 0 - 11 (January is 0)
+            var year = date.getFullYear();
+            
+            var formattedDate = month + "/" + day + "/" + year;
+            
+            var dateTime = time + "<br>" + formattedDate;
+            
+            document.getElementById("MyClockDisplay").innerHTML = dateTime;
+            
+            setTimeout(showTime, 1000);
+        }
+
+        showTime();
+    </script>
+<footer>
+    Made by : Tamanna Bothra
+</footer>
+</body>
+</html>
